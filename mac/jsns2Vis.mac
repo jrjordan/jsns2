@@ -1,0 +1,50 @@
+/glg4debug/glg4param omit_muon_processes  0.0
+/glg4debug/glg4param omit_hadronic_processes  0.0
+
+/rat/db/set DETECTOR experiment "jsns2"
+/rat/db/set DETECTOR geo_file "jsns2/jsns2.geo"
+/tracking/storeTrajectory 1
+/run/initialize
+
+/vis/open OGLIQt
+/vis/scene/create
+/vis/scene/add/volume
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+/vis/viewer/reset
+/vis/viewer/set/upVector 1 0 0
+/vis/drawVolume
+/vis/viewer/flush
+
+/vis/geometry/set/forceSolid volPMTActiveArea -1 True
+/vis/geometry/set/forceSolid volPMTGlassInactive -1 True
+/vis/geometry/set/forceSolid volPMTLowerGlass -1 True
+/vis/geometry/set/forceSolid volPMTBase -1 True
+
+/vis/geometry/set/colour volPMTActiveArea 0.8 0.1 0.1
+/vis/geometry/set/colour volPMTGlassInactive 0.7 0.7 0.7
+/vis/geometry/set/colour volPMTLowerGlass 0.7 0.7 0.7
+/vis/geometry/set/colour volPMTBase 0.3 0.3 0.3
+
+/vis/geometry/set/visibility volPMTVacuum -1 False
+
+/vis/geometry/set/forceSolid volTarget 1 True
+/vis/geometry/set/forceSolid volInnerTank 1 True
+
+/vis/geometry/set/colour volTarget 0.1 0.8 0.1 0.9
+/vis/geometry/set/colour volInnerTank 0.9 0.9 0.9 0.5
+/vis/geometry/set/colour volInnerPMTScintillator 0.8 0.1 0.8 0.6
+/vis/geometry/set/colour volBlackSheet 0.1 0.1 0.1 0.6
+/vis/geometry/set/colour volVetoScintillator 0.1 0.1 0.8 0.6
+/vis/geometry/set/colour volOuterTank 0.4 0.4 0.4 0.3
+
+/rat/proc count
+/rat/procset update 1
+
+/rat/proclast outroot
+
+/generator/add combo gun:point
+/generator/vtx/set opticalphoton 1 1 0 .0000031 # 400 nm photons
+/generator/pos/set 0 0 0
+
+/run/beamOn 1000

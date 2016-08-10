@@ -1,0 +1,19 @@
+/glg4debug/glg4param omit_muon_processes  0.0
+/glg4debug/glg4param omit_hadronic_processes  0.0
+
+/rat/db/set DETECTOR experiment "jsns2new"
+/rat/db/set DETECTOR geo_file "jsns2new/jsns2PMTTest.geo"
+/tracking/storeTrajectory 1
+
+/run/initialize
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+/vis/open OGLIQt
+/vis/drawVolume
+/vis/geometry/set/colour volPMTActiveArea 0.8 0.1 0.1
+/vis/geometry/set/colour volPMTGlassInactive 0.7 0.7 0.7
+/vis/geometry/set/colour volPMTLowerGlass 0.7 0.7 0.7
+/vis/geometry/set/colour volPMTBase 0.3 0.3 0.3
+/vis/viewer/set/style s
+/vis/viewer/set/viewpointThetaPhi 90.0 -90.0 deg
+/vis/viewer/set/lightsVector 0.0 -1.0 0.0
