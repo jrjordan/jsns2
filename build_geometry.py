@@ -1,6 +1,6 @@
 import os,sys
 from math import sin,cos,pi
-from gdml_parts_new import part1, part2, part3
+from gdml_parts import part1, part2, part3
 from build_pmtinfo import build_pmtinfo
 
 # This script generated GDML geometry files for KPIPE. It places the SiPMs parametrically.
@@ -49,9 +49,9 @@ def generate_gdml_file( gdmlFilename, PMTINFOFilename, pmtsPerRing=14, numRings=
 	PMT += 2
  
 
-    targetvol = "  <volume name=\"volOuterScintillator\">\n"
+    targetvol = "  <volume name=\"volInnerPMTScintillator\">\n"
     targetvol+= "    <materialref ref=\"scintCocktailLAB\"/>\n"
-    targetvol+= "    <solidref ref=\"outerScintillator\"/>\n"
+    targetvol+= "    <solidref ref=\"innerPMTScintillator\"/>\n"
     targetvol+= "    <physvol name=\"pvInnerTank\">\n"
     targetvol+= "      <volumeref ref=\"volInnerTank\"/>\n"
     targetvol+= "      <positionref ref=\"origin\"/>\n"
@@ -144,7 +144,7 @@ if __name__=="__main__":
     numRings = 7
     pipeLength = 344. # cm
     pipeRadius = 172. # cm
-    generate_gdml_file( "jsns2new.gdml", "PMTINFO.ratdb", pmtsPerRing, numRings, pipeLength, pipeRadius)
+    generate_gdml_file( "jsns2.gdml", "PMTINFO.ratdb", pmtsPerRing, numRings, pipeLength, pipeRadius)
         
 
     

@@ -166,6 +166,14 @@ part1="""<?xml version="1.0" encoding="UTF-8"?>
     <fraction n="0.3717" ref="oxygen"/>
   </material>
 
+  <material formula=" " name="blackNylon">
+    <D value="0.805" unit="g/cc"/>
+    <fraction n="0.098" ref="hydrogen"/>
+    <fraction n="0.6368" ref="carbon"/>
+    <fraction n="0.1414" ref="oxygen"/>
+    <fraction n="0.1238" ref="nitrogen"/>
+  </material>
+
 </materials>
 
 <solids>
@@ -187,7 +195,19 @@ part1="""<?xml version="1.0" encoding="UTF-8"?>
 	z="3.44"
 	deltaphi="360"
 	aunit="deg"/>
-  <tube name="outerScintillator"
+  <tube name="innerPMTScintillator"
+	lunit="m"
+	rmax="2.02"
+	z="4.04"
+	deltaphi="360"
+	aunit="deg"/>
+  <tube name="blackSheet"
+	lunit="m"
+	rmax="2.021"
+	z="4.042"
+	deltaphi="360"
+	aunit="deg"/>
+  <tube name="vetoScintillator"
 	lunit="m"
 	rmax="2.2"
 	z="4.40"
@@ -199,7 +219,6 @@ part1="""<?xml version="1.0" encoding="UTF-8"?>
 	z="4.44"
 	deltaphi="360"
 	aunit="deg"/>
-
 
   <ellipsoid name="PMTActive1" lunit="cm" ax="10.0" by="10.0" cz="8.0" zcut1="4.0"/>
   <ellipsoid name="PMTActive2" lunit="cm" ax="9.9" by="9.9" cz="7.9" zcut1="4.0"/>
@@ -350,13 +369,32 @@ part1="""<?xml version="1.0" encoding="UTF-8"?>
 #  </volume>
 #"""
 
-part2 = """ 
+part2 = """
+  
+  <volume name="volBlackSheet">
+    <materialref ref="blackNylon"/>
+    <solidref ref="blackSheet"/>
+    <physvol name="pvInnerPMTScintillator">
+      <volumeref ref="volInnerPMTScintillator"/>
+      <position name="posInnerPMTScintillator" unit="m" x="0" y="0" z="0"/>
+    </physvol>
+  </volume>
+
+  <volume name="volVetoScintillator">
+    <materialref ref="scintCocktailLAB"/>
+    <solidref ref="vetoScintillator"/>
+    <physvol name="pvBlackSheet">
+      <volumeref ref="volBlackSheet"/>
+      <position name="posBlackSheet" unit="m" x="0" y="0" z="0"/>
+    </physvol>
+  </volume>
+ 
   <volume name="volOuterTank">
     <materialref ref="stainless_steel"/>
     <solidref ref="outerTank"/>
-    <physvol name="pvOuterScintillator">
-      <volumeref ref="volOuterScintillator"/>
-      <position name="posOuterScintillator" unit="m" x="0" y="0" z="0"/>
+    <physvol name="pvVetoScintillator">
+      <volumeref ref="volVetoScintillator"/>
+      <position name="posVetoScintillator" unit="m" x="0" y="0" z="0"/>
     </physvol>
   </volume>
 """
